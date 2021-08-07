@@ -4,6 +4,7 @@ import telegram
 from telebot.credentials import bot_token, bot_user_name, URL
 import re
 import datetime
+import logging
 
 
 TOKEN = bot_token
@@ -57,8 +58,9 @@ def respond():
 
             # send same text with some mark
             bot.sendMessage(chat_id=chat_id, text="**{}**".format(text[::-1]), parse_mode=telegram.ParseMode.MARKDOWN)
-        except Exception:
+        except Exception as ex:
             # if things went wrong
+            logging.exception("ERROR!!!")
             bot.sendMessage(
                 chat_id=chat_id,
                 text="There was a problem in the name you used, please enter different name",
