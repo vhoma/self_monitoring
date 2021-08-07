@@ -54,7 +54,7 @@ def respond():
 
             # save log
             with open(LOG_FILE, 'a') as f:
-                f.write("{} {} {}".format(datetime.datetime.now(), user, text))
+                f.write("{} {} {}\n".format(datetime.datetime.now(), user, text))
 
             # send same text with some mark
             bot.sendMessage(chat_id=chat_id, text="**{}**".format(text[::-1]), parse_mode=telegram.ParseMode.MARKDOWN)
