@@ -49,7 +49,7 @@ def respond():
             # bot.sendPhoto(chat_id=chat_id, photo=url, reply_to_message_id=msg_id)
 
             # send same text with some mark
-            bot.sendMessage(chat_id=chat_id, text="# {}".format(text[::-1]), parse_mode=telegram.ParseMode.MARKDOWN)
+            bot.sendMessage(chat_id=chat_id, text="**{}**".format(text[::-1]), parse_mode=telegram.ParseMode.MARKDOWN)
         except Exception:
             # if things went wrong
             bot.sendMessage(
