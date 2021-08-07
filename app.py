@@ -8,7 +8,7 @@ import re
 TOKEN = bot_token
 HOST = '0.0.0.0'
 PORT = 443
-CERT = '../telebot.crt'
+CERT = '../telebot.pem'
 CERT_KEY = '../telebot.key'
 
 bot = telegram.Bot(token=TOKEN)
