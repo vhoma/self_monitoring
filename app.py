@@ -6,8 +6,14 @@ import re
 
 
 TOKEN = bot_token
+HOST = '0.0.0.0'
+PORT = 443
+CERT = '../telebot.crt'
+CERT_KEY = '../telebot.key'
+
 bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
+context = (CERT, CERT_KEY)
 
 
 @app.route('/{}'.format(TOKEN), methods=['POST'])
@@ -51,19 +57,15 @@ Please enter a name and the bot will reply with an avatar for your name.
     return 'ok'
 
 
-@app.route('/set_webhook', methods=['GET', 'POST'])
-def set_webhook():
-    s = bot.setWebhook('{URL}{HOOK}'.format(URL=URL, HOOK=TOKEN))
-    if s:
-        return "webhook setup ok"
-    else:
-        return "webhook setup failed"
-
-
 @app.route('/')
 def index():
     return '.'
 
 
+def set_webhook():
+    bot.setWebhook(webhook_url='https://%s:%s/%s' % (HOST, PORT, TOKEN), certificate=open(CERT, 'rb'))
+
+
 if __name__ == '__main__':
-    app.run(threaded=True)
+    set_webhook()
+    app.run(threaded=True, host=HOST, port=PORT, ssl_context=context)
