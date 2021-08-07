@@ -3,6 +3,7 @@ from flask import Flask, request
 import telegram
 from telebot.credentials import bot_token, bot_user_name, URL
 import re
+import datetime
 
 
 TOKEN = bot_token
@@ -10,6 +11,7 @@ HOST = '0.0.0.0'
 PORT = 443
 CERT = '../telebot.pem'
 CERT_KEY = '../telebot.key'
+LOG_FILE = 'log.txt'
 
 bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
@@ -23,6 +25,7 @@ def respond():
 
     chat_id = update.message.chat.id
     msg_id = update.message.message_id
+    user = update.message.from_user
 
     # Telegram understands UTF-8, so encode text for unicode compatibility
     text = update.message.text.encode('utf-8').decode()
@@ -47,6 +50,10 @@ def respond():
             # # reply with a photo to the name the user sent,
             # # note that you can send photos by url and telegram will fetch it for you
             # bot.sendPhoto(chat_id=chat_id, photo=url, reply_to_message_id=msg_id)
+
+            # save log
+            with open(LOG_FILE, 'a') as f:
+                f.write("{} {} {}".format(datetime.datetime.now(), user, text))
 
             # send same text with some mark
             bot.sendMessage(chat_id=chat_id, text="**{}**".format(text[::-1]), parse_mode=telegram.ParseMode.MARKDOWN)
