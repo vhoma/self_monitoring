@@ -63,7 +63,7 @@ def index():
 
 
 def set_webhook():
-    bot.setWebhook(webhook_url='https://%s:%s/%s' % (HOST, PORT, TOKEN), certificate=open(CERT, 'rb'))
+    bot.setWebhook('https://%s:%s/%s' % (HOST, PORT, TOKEN), certificate=open(CERT, 'rb'))
 
 
 if __name__ == '__main__':
