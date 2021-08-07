@@ -32,9 +32,9 @@ def respond():
     if text == "/start":
         # print the welcoming message
         bot_welcome = """
-Welcome to coolAvatar bot, 
-the bot is using the service from http://avatars.adorable.io/ to generate cool looking avatars. 
-Please enter a name and the bot will reply with an avatar for your name.
+Добро пожаловать в гости.
+это БОТ
+напиши мне сообщение и я поменяю его до НЕУЗНАВАЕМОСТИ!
 """
         # send the welcoming message
         bot.sendMessage(chat_id=chat_id, text=bot_welcome, reply_to_message_id=msg_id)
@@ -49,7 +49,7 @@ Please enter a name and the bot will reply with an avatar for your name.
             # bot.sendPhoto(chat_id=chat_id, photo=url, reply_to_message_id=msg_id)
 
             # send same text with some mark
-            bot.sendMessage(chat_id=chat_id, text="*bold* {}".format(text), parse_mode = telegram.ParseMode.MARKDOWN)
+            bot.sendMessage(chat_id=chat_id, text="# {}".format(text[::-1]), parse_mode=telegram.ParseMode.MARKDOWN)
         except Exception:
             # if things went wrong
             bot.sendMessage(
