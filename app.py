@@ -69,7 +69,7 @@ def respond():
             logging.exception("ERROR!!!")
             bot.sendMessage(
                 chat_id=chat_id,
-                text="There was a problem in the name you used, please enter different name",
+                text="Это какое-то непонятное сообщение. Я не могу его прочитать...",
                 reply_to_message_id=msg_id
             )
     return 'ok'
