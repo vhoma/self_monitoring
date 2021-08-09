@@ -30,8 +30,7 @@ def respond():
 
     # Telegram understands UTF-8, so encode text for unicode compatibility
     print("raw text: {}".format(update.message.text))
-    if update.message.text:
-        text = update.message.text.encode('utf-8').decode()
+    text = update.message.text.encode('utf-8').decode() if update.message.text else ""
     # for debugging purposes only
     print("got text message :", text)
     # the first time you chat with the bot AKA the welcoming message
